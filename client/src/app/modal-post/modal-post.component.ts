@@ -17,7 +17,7 @@ export class ModalPostComponent implements OnInit {
     city: new FormControl(),
     zip: new FormControl(),
     dateOfBirth: new FormControl(),
-    Gender: new FormControl()
+    gender: new FormControl()
   });
 
   constructor(/*private http: HttpClient*/) { }
