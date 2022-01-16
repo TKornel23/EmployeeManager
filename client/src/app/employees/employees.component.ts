@@ -12,6 +12,14 @@ export class EmployeesComponent implements OnInit {
 
   constructor(/*private http: HttpClient*/) { }
 
+  DeleteEmployee(id: number){
+    
+  }
+
+  UpdateEmployee(id: number){
+
+  }
+
   ngOnInit(): void {
     //this.getEmployees();
   }
