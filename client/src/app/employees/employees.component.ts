@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DataSenderService } from '../data-sender.service';
 
 @Component({
   selector: 'app-employees',
@@ -10,7 +11,7 @@ export class EmployeesComponent implements OnInit {
 
   Employees: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private dss:DataSenderService) { }
 
   DeleteEmployee(id: number){
     this.http.delete("http://localhost:16054/employee/" + id).subscribe(
@@ -37,5 +38,12 @@ export class EmployeesComponent implements OnInit {
       }
     );
   }
+
+  getOneEmployee(id:number)
+  {
+    this.dss.getOneEmployee(id);
+  }
+
+  
 
 }

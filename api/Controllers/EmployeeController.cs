@@ -58,5 +58,26 @@ namespace api.Controllers
                 return Ok(employee);
             }
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id,[FromBody] Employee employee)
+        {
+            Employee empToUpd = await _ctx.Employees.FirstOrDefaultAsync(x => x.Id == id);
+            if(empToUpd is not null)
+            {
+                empToUpd.Email = employee.Email;
+                empToUpd.Name = employee.Name;
+                empToUpd.Zip = employee.Zip;
+                empToUpd.Gender = employee.Gender;
+                empToUpd.BirthDate = employee.BirthDate;
+                empToUpd.City = employee.City;
+                await _ctx.SaveChangesAsync();
+                return Ok(employee);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

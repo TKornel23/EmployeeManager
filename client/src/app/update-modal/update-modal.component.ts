@@ -18,10 +18,10 @@ export class UpdateModalComponent implements OnInit {
     BirthDate: new FormControl(),
     gender: new FormControl()
   })
-  emptoupdate : any;
-  constructor(private http:HttpClient, private dss:DataSenderService) { }
-
+  emptoupdate: any;
+  constructor(private http:HttpClient, public dss:DataSenderService,) {}
   ngOnInit(): void {
+    
   }
 
   onSubmit(){
@@ -30,17 +30,9 @@ export class UpdateModalComponent implements OnInit {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
       }
       let myform = JSON.stringify(this.employee.value)
-      this.http.put("http://localhost:16054/employee" + this.dss.id, myform, httpOptions).subscribe(
-        (response) => {console.log(response); console.log(myform); window.location.reload();}, (error) => console.log(error)
+      this.http.put("http://localhost:16054/employee/" + this.dss.emptoupdate.id, myform, httpOptions).subscribe(
+        (response) => {console.log(response); console.log(myform); window.location.reload}, (error) => console.log(error)
       )
-      this.employee.reset();
     }
-
   }
-  getOneEmployee(){
-    this.http.get("http://localhost:16054/employee/"+this.dss.id).subscribe(
-      (response) => {console.log(response); this.emptoupdate=response}, (error) => console.log(error)
-    )
-  }
-
 }

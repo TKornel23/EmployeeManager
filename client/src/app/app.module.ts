@@ -12,13 +12,15 @@ import { EmployeesComponent } from './employees/employees.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { UpdateModalComponent } from './update-modal/update-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ModalPostComponent,
     NavbarComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    UpdateModalComponent
   ],
   imports: [
     BrowserModule,
