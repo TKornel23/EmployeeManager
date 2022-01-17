@@ -19,7 +19,7 @@ export class UpdateModalComponent implements OnInit {
     gender: new FormControl()
   })
   emptoupdate: any;
-  constructor(private http:HttpClient, public dss:DataSenderService,) {}
+  constructor(private http:HttpClient, public dss:DataSenderService) {}
   ngOnInit(): void {
     
   }

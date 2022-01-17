@@ -19,10 +19,6 @@ export class EmployeesComponent implements OnInit {
     );
   }
 
-  UpdateEmployee(id: number){
-    
-  }
-
   ngOnInit(): void {
     this.getEmployees();
   }
@@ -43,7 +39,4 @@ export class EmployeesComponent implements OnInit {
   {
     this.dss.getOneEmployee(id);
   }
-
-  
-
 }

@@ -28,13 +28,13 @@ namespace api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> Details(int id)
         {
-            return Ok(await _ctx.Employees.FirstOrDefaultAsync(x =>x.Id == id));
+            return Ok(await _ctx.Employees.FirstOrDefaultAsync(x => x.Id == id));
         }
 
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Employee employee)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _ctx.Employees.AddAsync(employee);
                 await _ctx.SaveChangesAsync();
@@ -47,7 +47,7 @@ namespace api.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             Employee employee = await _ctx.Employees.FirstOrDefaultAsync(x => x.Id == id);
-            if(employee is null)
+            if (employee is null)
             {
                 return BadRequest();
             }
@@ -60,10 +60,10 @@ namespace api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id,[FromBody] Employee employee)
+        public async Task<ActionResult> Update(int id, [FromBody] Employee employee)
         {
             Employee empToUpd = await _ctx.Employees.FirstOrDefaultAsync(x => x.Id == id);
-            if(empToUpd is not null)
+            if (empToUpd is not null)
             {
                 empToUpd.Email = employee.Email;
                 empToUpd.Name = employee.Name;
