@@ -1,6 +1,7 @@
 ﻿using api.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace api.Controllers
 {
+    [Route("employee")]
     public class EmployeeController : Controller
     {
         private EmployeeDbContext _ctx;
@@ -17,78 +19,43 @@ namespace api.Controllers
             _ctx = ctx;
         }
 
-        // GET: EmployeeController
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult> Index()
         {
-            return View();
+            return Ok(await _ctx.Employees.ToListAsync());
         }
 
-        // GET: EmployeeController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            return Ok(await _ctx.Employees.FirstOrDefaultAsync(x =>x.Id == id));
         }
 
-        // GET: EmployeeController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: EmployeeController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create([FromBody] Employee employee)
         {
-            try
+            if(ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                await _ctx.Employees.AddAsync(employee);
+                await _ctx.SaveChangesAsync();
+                return Ok(employee);
             }
-            catch
-            {
-                return View();
-            }
+            return BadRequest("employee media is not supported");
         }
 
-        // GET: EmployeeController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
-        }
-
-        // POST: EmployeeController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            Employee employee = await _ctx.Employees.FirstOrDefaultAsync(x => x.Id == id);
+            if(employee is null)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest();
             }
-            catch
+            else
             {
-                return View();
-            }
-        }
-
-        // GET: EmployeeController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: EmployeeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+                _ctx.Employees.Remove(employee);
+                await _ctx.SaveChangesAsync();
+                return Ok(employee);
             }
         }
     }

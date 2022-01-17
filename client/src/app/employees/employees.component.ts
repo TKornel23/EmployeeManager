@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-employees',
@@ -10,23 +10,25 @@ export class EmployeesComponent implements OnInit {
 
   Employees: any;
 
-  constructor(/*private http: HttpClient*/) { }
+  constructor(private http: HttpClient) { }
 
   DeleteEmployee(id: number){
-
+    this.http.delete("http://localhost:16054/employee/" + id).subscribe(
+      response => {console.log(response); window.location.reload();}, error => console.log(error)
+    );
   }
 
   UpdateEmployee(id: number){
-
+    
   }
 
   ngOnInit(): void {
-    //this.getEmployees();
+    this.getEmployees();
   }
 
-  /*getEmployees()
+  getEmployees()
   {
-    this.http.get("").subscribe(
+    this.http.get("http://localhost:16054/employee").subscribe(
       response => {
         this.Employees = response
       },
@@ -34,6 +36,6 @@ export class EmployeesComponent implements OnInit {
         console.log(error);
       }
     );
-  }*/
+  }
 
 }

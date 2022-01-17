@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-post',
@@ -16,28 +16,28 @@ export class ModalPostComponent implements OnInit {
     address: new FormControl(),
     city: new FormControl(),
     zip: new FormControl(),
-    dateOfBirth: new FormControl(),
+    BirthDate: new FormControl(),
     gender: new FormControl()
   });
 
-  constructor(/*private http: HttpClient*/) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(){
-    /*const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
-    this.http.post("", JSON.stringify(employee), httpOptions).subscribe(response => {
-      console.log(response);
-    },
-    {
-      error => {
-        console.log(error);
+    if(this.employee.valid){
+      const httpOptions = {
+        headers: new HttpHeaders({'Content-Type': 'application/json'})
       }
-    });
-    */
+      let myform = JSON.stringify(this.employee.value)
+      this.http.post("http://localhost:16054/employee", myform, httpOptions).subscribe(
+        (response) => {console.log(response); console.log(myform); window.location.reload();}, (error) => console.log(error)
+      )
+      this.employee.reset();
+    }
+
   }
+
 
 }
