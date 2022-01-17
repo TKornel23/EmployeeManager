@@ -1,0 +1,43 @@
+<form [formGroup]="employee" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" id="Email" placeholder="johndoe@yahoo.com" formControlName="email" minlength="1" value="{{}}">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="Password">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="John Doe" formControlName="name" minlength="1">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" class="form-control" id="address" placeholder="1234 Main St" formControlName="address" minlength="1">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" placeholder="Miami" formControlName="city" minlength="1">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="zip">Zip</label>
+        <input type="text" class="form-control" id="zip" placeholder="1234" formControlName="zip" minlength="1">
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="birth">Date of Birth</label>
+          <input type="date" class="form-control" id="birth" formControlName="BirthDate" minlength="1">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="gender">Gender</label>
+          <select class="form-control" id="gender" formControlName="gender" minlength="1">
+              <option>Female</option>
+              <option>Male</option>
+          </select>
+        </div>
+      </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary"  [disabled]="!employee.valid">Update</button>
+    </div>
+</form>
