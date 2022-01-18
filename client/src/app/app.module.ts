@@ -13,7 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateModalComponent } from './update-modal/update-modal.component';
-import { DetailsModalComponent } from './details-modal/details-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,7 @@ import { DetailsModalComponent } from './details-modal/details-modal.component';
     ModalPostComponent,
     NavbarComponent,
     EmployeesComponent,
-    UpdateModalComponent,
-    DetailsModalComponent
+    UpdateModalComponent
   ],
   imports: [
     BrowserModule,
